@@ -9,8 +9,7 @@
     function edit(element, match, replacer){
         const text = element.textContent;
 
-        const result = text.split(match).join(replacer);
-        element.textContent = result;
+        element.textContent.replace(match, replacer);
     }
 </script>
 </body>
