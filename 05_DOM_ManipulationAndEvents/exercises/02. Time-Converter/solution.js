@@ -1,38 +1,40 @@
 function attachEventsListeners() {
 
-    let daysButton = document.getElementById('daysBtn');
-    let hoursButton = document.getElementById('hoursBtn');
-    let minutesButton = document.getElementById('minutesBtn');
-    let secondsButton = document.getElementById('secondsBtn');
+    let daysBtn = document.getElementById('daysBtn');
+    let hoursBtn = document.getElementById('hoursBtn');
+    let minutesBtn = document.getElementById('minutesBtn');
+    let secondsBtn = document.getElementById('secondsBtn');
+
     let days = document.getElementById('days');
     let hours = document.getElementById('hours');
     let minutes = document.getElementById('minutes');
     let seconds = document.getElementById('seconds');
 
-    let ratios = {
+    let rations = {
         days: 1,
         hours: 24,
         minutes: 1440,
         seconds: 86400
     }
 
-    daysButton.addEventListener('click', onConvert);
-    hoursButton.addEventListener('click', onConvert);
-    minutesButton.addEventListener('click', onConvert);
-    secondsButton.addEventListener('click', onConvert);
+    daysBtn.addEventListener('click', onConvert);
+    hoursBtn.addEventListener('click', onConvert);
+    minutesBtn.addEventListener('click', onConvert);
+    secondsBtn.addEventListener('click', onConvert);
 
     function convert(value, unit){
-        let days = value / ratios[unit];
-        return{
+        let days = value / rations[unit];
+
+        return {
             days: days,
-            hours: days * ratios.hours,
-            minutes: days * ratios.minutes,
-            seconds: days * ratios.seconds
+            hours: days * rations.hours,
+            minutes: days * rations.minutes,
+            seconds: days * rations.seconds
         }
     }
 
-    function onConvert(event){
-        let input = event.target.parentElement.querySelector('input[type = "text"]');
+    function onConvert(e){
+        let input = e.target.parentElement.querySelector('input[type = text]');
         let time = convert(Number(input.value), input.id);
 
         days.value = time.days;

@@ -5,11 +5,12 @@ function addItem() {
     let select = document.getElementById('menu');
 
     let optionElement = document.createElement('option');
-    optionElement.textConten = newItemText.value;
-    optionElement.value = newItemValue.value;
+    optionElement.textContent = newItemText.value; // label
+    optionElement.value = newItemValue.value; // value
 
     select.appendChild(optionElement);
 
     newItemText.value = '';
     newItemValue.value = '';
+
 }

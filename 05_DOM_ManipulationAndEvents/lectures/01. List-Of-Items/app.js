@@ -4,12 +4,11 @@ function addItem() {
     const input = document.getElementById('newItemText');
 
     // create <li> element and assign input value to element text content
-    const liElement = document.createElement('li');
-    liElement.textContent = input.value;
+    const li = document.createElement('li');
+    li.textContent = input.value;
 
     // select <ul> and append new element
-    const ulElement = document.getElementById('items');
-    ulElement.appendChild(liElement);
+    document.getElementById('items').appendChild(li);
 
     // select input field and clear contents (value)
     input.value = '';

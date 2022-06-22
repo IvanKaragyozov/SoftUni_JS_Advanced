@@ -4,19 +4,19 @@ function addItem() {
     const input = document.getElementById('newItemText');
 
     // create <li> element and assign input value to element text content
-    const liElement = document.createElement('li');
-    liElement.textContent = input.value;
+    const li = document.createElement('li');
+    li.textContent = input.value;
 
     // create [Delete] anchor
-    const deleteButton = document.createElement('a');
-    deleteButton.textContent = '[Delete]';
-    deleteButton.href = '#';
-    liElement.appendChild(deleteButton);
+    const deleteBtn = document.createElement('a');
+    deleteBtn.textContent = '[Delete]';
+    deleteBtn.href = '#';
+    li.appendChild(deleteBtn);
 
-    deleteButton.addEventListener('click', onDelete);
+    deleteBtn.addEventListener('click', onDelete);
 
     // select <ul> and append new element
-    document.getElementById('items').appendChild(liElement);
+    document.getElementById('items').appendChild(li);
 
     // select input field and clear contents (value)
     input.value = '';

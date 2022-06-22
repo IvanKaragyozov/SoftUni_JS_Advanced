@@ -1,55 +1,65 @@
 function solve() {
 
-    const [generateButton, buyButton] = Array.from(document.querySelectorAll('button'));
-    const [input, output] = Array.from(document.querySelectorAll('textarea'));
-    const tbody = document.querySelector('tbody');
+    let[generateBtn, buyBtn] = Array.from(document.querySelectorAll('button'));
 
-    generateButton.addEventListener('click', generate);
-    buyButton.addEventListener('click', buy);
+    generateBtn.addEventListener('click', generate);
+    buyBtn.addEventListener('click', buy);
 
-    const items = [];
+    function generate(e){
+        let input = JSON.parse(document.querySelector('textarea').value);
+        input.forEach(x => {
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            let img = document.createElement('img');
+            img.src = x.img;
+            td1.appendChild(img);
+            tr.appendChild(td1);
 
-    function generate(){
-        const data = JSON.parse(input.value);
+            let td2 = document.createElement('td');
+            let p = document.createElement('p');
+            p.textContent = x.name;
+            td2.appendChild(p);
+            tr.appendChild(td2);
 
-        for (let item of data) {
-            const row = document.createElement('tr');
+            let td3 = document.createElement('td');
+            let p2 = document.createElement('p');
+            p2.textContent = Number(x.price);
+            td3.appendChild(p2);
+            tr.appendChild(td3);
 
-            row.appendChild(document.createElement('img', item.img));
-            row.appendChild(document.createElement('p', item.name));
-            row.appendChild(document.createElement('p', item.name));
-            row.appendChild(document.createElement('p', item.decFactor));
+            let td4 = document.createElement('td');
+            let p3 = document.createElement('p');
+            p3.textContent = Number(x.decFactor);
+            td4.appendChild(p3);
+            tr.appendChild(td4);
 
-            const col5 = document.createElement('td');
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            col5.append(checkbox);
-            row.append(col5);
+            let td5 = document.createElement('td');
+            let input = document.createElement('input');
+            input.type = 'checkbox';
+            td5.appendChild(input);
+            tr.appendChild(td5);
 
-            tbody.appendChild(row);
-
-            items.push(row);
-        }
+            document.querySelector('tbody').appendChild(tr);
+        })
     }
 
-    function buy(){
-        console.log(items);
+    function buy(e){
+        let checkboxes = Array.from(document.querySelectorAll('tbody input')).filter(c => c.checked);
+        let bought = [];
+        let price = 0;
+        let decoration = 0;
 
-    }
+        checkboxes.forEach(x => {
+            let parent = x.parentElement.parentElement;
+            let data = Array.from(parent.querySelectorAll('p'));
+            bought.push(data[0].textContent);
+            price += Number(data[1].textContent);
+            decoration += Number(data[2].textContent);
+        });
 
-    function createColumn(type, content){
-        const result = document.createElement('td');
-        let inner;
-
-        if(type === 'img'){
-            inner = document.createElement('img');
-            inner.src = content;
-        } else {
-            inner = document.createElement('p');
-            inner.textContent = content;
-        }
-        result.appendChild(inner);
-
-        return result;
+        let output = document.querySelectorAll('textarea')[1];
+        output.textContent += `Bought furniture: ${bought.join(', ')}\r\n`;
+        output.textContent += `Total price: ${price.toFixed(2)}\r\n`;
+        output.textContent += `Average decoration factor: ${decoration / checkboxes.length}`;
     }
 }

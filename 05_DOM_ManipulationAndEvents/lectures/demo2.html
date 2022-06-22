@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Increment button</title>
+</head>
+<body>
+    <button>0</button>
+    <button>0</button>
+    <button>0</button>
+    <button>0</button>
+    <button>0</button>
+
+    <script>
+
+        // with each click on the buttons increment their values with 1
+        document.querySelectorAll('button').forEach(b => b.addEventListener('click', increment));
+        document.querySelectorAll('button').forEach(b => b.addEventListener('mousemove', increment));
+
+        function increment(event) {
+            event.target.textContent = Number(event.target.textContent) + 1;
+        }
+    </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 function attachEventsListeners() {
+
     let buttonConvert = document.getElementById('convert');
     buttonConvert.addEventListener('click', onClick);
 
@@ -18,10 +19,9 @@ function attachEventsListeners() {
         let toValue = document.getElementById('outputUnits').value;
 
         let inputDistance = Number(document.getElementById('inputDistance').value);
-        let outputDistance = document.getElementById('outputDistance');
+        let outputDistanceElement = document.getElementById('outputDistance');
 
         let valueInMeters = inputDistance * metricUnits[fromValue];
-        let convertedValue = valueInMeters / metricUnits[toValue];
-        outputDistance.value = convertedValue;
+        outputDistanceElement.value = valueInMeters / metricUnits[toValue];
     }
 }
